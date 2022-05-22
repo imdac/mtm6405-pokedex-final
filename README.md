@@ -1,2 +1,4 @@
-# mtm6405-pokedex
-This repository contains the starter files for the Pokedex project.
+# Pokedex
+
+## Objective
+Using the provided data array, create a simple Pokedex gallery using PHP and query strings. 
