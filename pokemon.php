@@ -1,3 +1,12 @@
+<?php 
+  require "pokedex.php";
+
+  if (isset($_GET['id']) && isset($pokedex[$_GET['id'] - 1])) {
+    $pokemon = $pokedex[$_GET['id'] - 1];
+  } else {
+    header('Location: index.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,25 +20,34 @@
   <main class="container">
     <div class="row">
       <div class="col">
-        <h1 class="display-4 my-5 text-center">Bulbasaur</h1>
+        <h1 class="display-4 my-5 text-center"><?php echo $pokemon['name']; ?></h1>
         <div class="mb-3 row">
           <div class="col">
-            <img class="p-3 img-fluid" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Bulbasaur">
+            <img class="p-3 img-fluid" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<?php echo $pokemon['id']; ?>.png" alt="<?php echo $pokemon['name']; ?>">
           </div>
           <div class="col"> 
             <h2>Abilities</h2>
             <ul>
-              <li>overgrow</li>
-              <li>chlorophyll</li>
+              <?php foreach ($pokemon['abilities'] as $ability) : ?>
+              <li><?php echo $ability; ?></li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </div>
         <div class="text-center">
+          <?php if ($_GET['id'] > 1) : ?>
+          <a class="btn btn-outline-primary" href="?id=<?php echo $_GET['id'] - 1; ?>">Prev</a>
+          <?php else: ?>
           <a class="btn btn-outline-primary disabled">Prev</a>
+          <?php endif; ?>
           
           <a class="btn btn-outline-primary" href="index.php">Home</a>
 
-          <a class="btn btn-outline-primary" href="pokemon.php">Next</a>
+          <?php if ($_GET['id'] < count($pokedex)) : ?>
+          <a class="btn btn-outline-primary" href="?id=<?php echo $_GET['id'] + 1; ?>">Next</a>
+          <?php else: ?>
+          <a class="btn btn-outline-primary disabled">Next</a>
+          <?php endif; ?>
       </div>
     </div>  
   </main>

@@ -1,3 +1,4 @@
+<?php require "pokedex.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +14,12 @@
       <div class="col">
         <h1 class="display-4 my-5 text-center">Pokedex</h1>
         <div class="d-flex flex-wrap justify-content-center">
-          <a class="m-3 text-decoration-none" href="pokemon.php">
-            <img class="p-3 border border-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Bulbasaur"><br>
-            <p class="text-center text-black">Bulbasaur</p>
+          <?php foreach ($pokedex as $pokemon) : ?>
+          <a class="m-3 text-decoration-none" href="pokemon.php?id=<?php echo $pokemon['id']; ?>">
+            <img class="p-3 border border-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?php echo $pokemon['id']; ?>.png" alt="<?php echo $pokemon['name']; ?>"><br>
+            <p class="text-center text-black"><?php echo $pokemon['name']; ?></p>
           </a>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
